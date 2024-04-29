@@ -9,6 +9,7 @@ function Text({ content, strong }) {
 
 export default function Home() {
   return <div>
+    <h1>ELLIE TEST</h1>
     <Text content="Welcome to the Ellie test." strong={false} />
     <Text content="My name is Ellie." strong={true} />
     <Text content="Good luck." strong={false} />
