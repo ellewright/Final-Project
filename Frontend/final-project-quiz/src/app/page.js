@@ -1,18 +1,36 @@
-import { Question } from "@/components/Question";
-function Text({ content, strong }) {
-  if (strong) {
-    return <strong>{content}</strong>
-  }
+"use client";
 
-  return <p>{content}</p>
+import { useState } from "react";
+
+function Quiz() {
+return <>
+  <Question value={"Question 1."} />
+  <Question value={"Question 2."} />
+  <Question value={"Question 3."} />
+</>
+}
+
+function Question({value}) {
+  function onButtonClick() {}
+  return <>
+    <h2>{value}</h2>
+    <Button value="Yes" onClick={() => onButtonClick()} />
+    <Button value="Yes" onClick={() => onButtonClick()} />
+    <Button value="Yes" onClick={() => onButtonClick()} />
+    <Button value="Yes" onClick={() => onButtonClick()} />
+  </>
+}
+
+function Button({value, onClick}) {
+  return <button className="button" onClick={onClick}>
+    {value}
+  </button>
 }
 
 export default function Home() {
-  return <div>
-    <h1>ELLIE TEST</h1>
-    <Text content="Welcome to the Ellie test." strong={false} />
-    <Text content="My name is Ellie." strong={true} />
-    <Text content="Good luck." strong={false} />
-    <Question text={"Who is my favorite singer?"} choices={["Taylor Swift", "Ed Sheeran", "Ariana Grande"]} answer={"Taylor Swift"} />
-  </div>;
+  return (
+    <div>
+      <Quiz />
+    </div>
+  );
 }
