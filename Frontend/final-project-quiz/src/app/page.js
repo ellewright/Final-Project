@@ -4,20 +4,32 @@ import { useState } from "react";
 
 function Quiz() {
 return <>
-  <Question value={"Question 1."} />
-  <Question value={"Question 2."} />
-  <Question value={"Question 3."} />
+  <Question value={"What city was Ellie born in?"} possibleAnswers={["Louisville", "Kansas City", "Chicago", "Boston"]} />
+  <Question value={"What is Ellie's favorite color?"} possibleAnswers={["Orange", "Purple", "Pink", "Blue"]} />
+  <Question value={"What animal was Ellie's stuffed animal as a kid?"} possibleAnswers={["Penguin", "Elephant", "Dog", "Tarantula"]} />
+  <Question value={"What was Ellie's major while at university?"} possibleAnswers={["Marketing", "Theatre", "Computer Science", "Psychology"]} />
+  <Question value={"Which instrument does Ellie not play?"} possibleAnswers={["Guitar", "Flute", "Keyboard", "Drums"]} />
+  <Question value={"Who is the author of Ellie's favorite book?"} possibleAnswers={["J.K. Rowling", "F. Scott Fitzgerald", "J.D. Salinger", "Dalton Trumbo"]} />
+  <Question value={"What is Ellie's favorite fruit?"} possibleAnswers={["Kiwi", "Pear", "Banana", "Apple"]} />
+  <Question value={"What spoken language is Ellie learning on Duolingo?"} possibleAnswers={["Spanish", "Italian", "Mandarin", "French"]} />
+  <Question value={"Which is Ellie's favorite cuisine?"} possibleAnswers={["Korean", "Cuban", "German", "Italian"]} />
+  <Question value={"Which show does Ellie not enjoy?"} possibleAnswers={["30 Rock", "Trailer Park Boys", "South Park", "Rick & Morty"]} />
 </>
 }
 
-function Question({value}) {
-  function onButtonClick() {}
+function Question({value, possibleAnswers}) {
+  function onButtonClick(answer) {
+    console.log(`Selected answer: ${answer}`);
+  }
   return <>
-    <h2>{value}</h2>
-    <Button value="Yes" onClick={() => onButtonClick()} />
-    <Button value="Yes" onClick={() => onButtonClick()} />
-    <Button value="Yes" onClick={() => onButtonClick()} />
-    <Button value="Yes" onClick={() => onButtonClick()} />
+    <h2 className="question">{value}</h2>
+    {possibleAnswers.map((answer, index) => (
+        <Button
+          key={index}
+          value={answer}
+          onClick={() => onButtonClick(answer)}
+        />
+      ))}
   </>
 }
 

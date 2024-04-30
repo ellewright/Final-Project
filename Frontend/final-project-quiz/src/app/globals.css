@@ -2,16 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.question {
+  font-size: 18px;
+  margin-left: 5px;
+}
+
 .button {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
+  background: #b3b3b3;
+  border: 1px solid #191414;
+  font-size: 16px;
   line-height: 34px;
   height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
   text-align: center;
-  width: 34px;
+  width: 150px;
+  margin: 1px;
 }
