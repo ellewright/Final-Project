@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  margin: 10px;
+}
+
 .question {
   font-size: 18px;
   margin-left: 5px;
