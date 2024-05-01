@@ -1,6 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
+}
 
 const questions = [
   {
@@ -58,6 +67,11 @@ const questions = [
 function Quiz() {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
+  const [shuffledQuestions, setShuffledQuestions] = useState([]);
+
+  useEffect(() => {
+    setShuffledQuestions(shuffle([...questions]));
+  }, []);
 
   function handleAnswerSelected(questionId, selectedAnswer) {
     setSelectedAnswers((prevAnswers) => ({
@@ -71,7 +85,7 @@ function Quiz() {
     if (Object.keys(selectedAnswers).length === questions.length) {
       // Calculate correct answers
       let correctAnswersCount = 0;
-      questions.forEach((question) => {
+      shuffledQuestions.forEach((question) => {
         if (selectedAnswers[question.value] === question.correctAnswer) {
           correctAnswersCount++;
         }
@@ -87,7 +101,7 @@ function Quiz() {
   return (
     <>
       <div>
-        {questions.map((question, index) => (
+        {shuffledQuestions.map((question, index) => (
           <Question
             key={index}
             question={question}
