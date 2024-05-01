@@ -21,3 +21,7 @@ body {
   width: 150px;
   margin: 1px;
 }
+
+.selected {
+  background: #535353;
+}
