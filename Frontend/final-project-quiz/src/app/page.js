@@ -56,61 +56,88 @@ const questions = [
 ]
 
 function Quiz() {
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [showResults, setShowResults] = useState(false);
 
-  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
-
-  function handleAnswerSelected(selectedAnswer, correctAnswer) {
-    if (selectedAnswer === correctAnswer) {
-      setCorrectAnswersCount((prevCount) => prevCount + 1);
-    }
+  function handleAnswerSelected(questionId, selectedAnswer) {
+    setSelectedAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionId]: selectedAnswer
+    }));
   }
 
   function handleSubmit() {
-    alert(`You got ${correctAnswersCount} correct answers out of ${questions.length}.`);
+    // Check if all questions have been answered
+    if (Object.keys(selectedAnswers).length === questions.length) {
+      // Calculate correct answers
+      let correctAnswersCount = 0;
+      questions.forEach((question) => {
+        if (selectedAnswers[question.value] === question.correctAnswer) {
+          correctAnswersCount++;
+        }
+      });
+      // Show results
+      setShowResults(true);
+      alert(`You got ${correctAnswersCount} correct answers out of ${questions.length}.`);
+    } else {
+      alert("Please answer all questions before submitting.");
+    }
   }
 
-  return <>
-    <div>
-      {questions.map((question, index) => (
-        <Question
-        key={index}
-        value={question.value}
-        possibleAnswers={question.possibleAnswers}
-        correctAnswer={question.correctAnswer}
-        onAnswerSelected={handleAnswerSelected}
-        />
-      ))}
-    </div>
-    <div>
-      <button className="submit-button" onClick={handleSubmit}>Submit</button>
-    </div>
-  </>
-}
-function Question({value, possibleAnswers, correctAnswer, onAnswerSelected}) {
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  
-  function onButtonClick(answer) {
-    setSelectedAnswer(answer);
-    onAnswerSelected(answer, correctAnswer);
-  }
-
-  return <>
-      <h2 className="question">{value}</h2>
-      {possibleAnswers.map((answer, index) => (
-          <Button
+  return (
+    <>
+      <div>
+        {questions.map((question, index) => (
+          <Question
             key={index}
-            value={answer}
-            onClick={() => onButtonClick(answer)}
-            isSelected={selectedAnswer === answer}
+            question={question}
+            onAnswerSelected={handleAnswerSelected}
           />
         ))}
-  </>
+      </div>
+      <div>
+        <button className="submit-button" onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
+      {showResults && (
+        <div>
+          {/* Display results here if needed */}
+        </div>
+      )}
+    </>
+  );
 }
 
-function Button({value, onClick, isSelected}) {
-  return <button className={`button ${isSelected ? 'selected' : ''}`} onClick={onClick}>
-    {value}
-  </button>
+function Question({ question, onAnswerSelected }) {
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+  function onButtonClick(answer) {
+    setSelectedAnswer(answer);
+    onAnswerSelected(question.value, answer);
+  }
+
+  return (
+    <>
+      <h2 className="question">{question.value}</h2>
+      {question.possibleAnswers.map((answer, index) => (
+        <Button
+          key={index}
+          value={answer}
+          onClick={() => onButtonClick(answer)}
+          isSelected={selectedAnswer === answer}
+        />
+      ))}
+    </>
+  );
+}
+
+function Button({ value, onClick, isSelected }) {
+  return (
+    <button className={`button ${isSelected ? 'selected' : ''}`} onClick={onClick}>
+      {value}
+    </button>
+  );
 }
 
 export default function Home() {
