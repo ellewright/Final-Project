@@ -1,6 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import questions from "./questions";
+
+const darkPink = "#F9476C";
+const lightPink = "#FF8195";
+const tan = "#FDD5CB";
+const eggshell = "#FAF2E8";
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -10,59 +16,6 @@ function shuffle(array) {
 
   return array;
 }
-
-const questions = [
-  {
-    value: "What city was Ellie born in?",
-    possibleAnswers: ["Louisville", "Kansas City", "Chicago", "Boston"],
-    correctAnswer: "Louisville"
-  },
-  {
-    value: "What is Ellie's favorite color?",
-    possibleAnswers: ["Orange", "Purple", "Pink", "Blue"],
-    correctAnswer: "Pink"
-  },
-  {
-    value: "What animal was Ellie's stuffed animal as a kid?",
-    possibleAnswers: ["Penguin", "Elephant", "Dog", "Tarantula"],
-    correctAnswer: "Elephant"
-  },
-  {
-    value: "What was Ellie's major while at university?",
-    possibleAnswers: ["Marketing", "Theatre", "Computer Science", "Psychology"],
-    correctAnswer: "Psychology"
-  },
-  {
-    value: "Which instrument does Ellie not play?",
-    possibleAnswers: ["Guitar", "Flute", "Keyboard", "Drums"],
-    correctAnswer: "Flute"
-  },
-  {
-    value: "Who is the author of Ellie's favorite book?",
-    possibleAnswers: ["J.K. Rowling", "F. Scott Fitzgerald", "J.D. Salinger", "Dalton Trumbo"],
-    correctAnswer: "Dalton Trumbo"
-  },
-  {
-    value: "What is Ellie's favorite fruit?",
-    possibleAnswers: ["Kiwi", "Pear", "Banana", "Apple"],
-    correctAnswer: "Banana"
-  },
-  {
-    value: "What spoken language is Ellie learning on Duolingo?",
-    possibleAnswers: ["Spanish", "Italian", "Mandarin", "French"],
-    correctAnswer: "Spanish"
-  },
-  {
-    value: "Which is Ellie's favorite cuisine?",
-    possibleAnswers: ["Korean", "Cuban", "German", "Italian"],
-    correctAnswer: "Cuban"
-  },
-  {
-    value: "Which show does Ellie not enjoy?",
-    possibleAnswers: ["30 Rock", "Trailer Park Boys", "South Park", "Rick & Morty"],
-    correctAnswer: "Rick & Morty"
-  }
-]
 
 function Quiz() {
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -104,8 +57,8 @@ function Quiz() {
   }
 
   return (
-    <>
-      <div>
+    <div className="quiz flex-col">
+      <div className="border-2 p-2">
         {shuffledQuestions.map((question, index) => (
           <Question
             key={index}
@@ -114,17 +67,17 @@ function Quiz() {
           />
         ))}
       </div>
-      <div>
-        <button className="submit-button" onClick={handleSubmit}>
+      <div className="flex items-center justify-center p-2 border-2 rounded-md">
+        <button className="border-2 p-2 rounded-md" onClick={handleSubmit}>
           Submit
         </button>
       </div>
       {showResults && (
         <div>
-          {/* Display results here if needed */}
+          {/* Display results here*/}
         </div>
       )}
-    </>
+    </div>
   );
 }
 
@@ -137,23 +90,26 @@ function Question({ question, onAnswerSelected }) {
   }
 
   return (
-    <>
-      <h2 className="question">{question.value}</h2>
-      {question.possibleAnswers.map((answer, index) => (
-        <Button
-          key={index}
-          value={answer}
-          onClick={() => onButtonClick(answer)}
-          isSelected={selectedAnswer === answer}
-        />
-      ))}
-    </>
+    <div>
+      <h2 className="flex question border-2 p-2 items-center justify-center rounded-md">{question.value}</h2>
+        <div className="flex space-x-4 items-center justify-center">
+          {question.possibleAnswers.map((answer, index) => (
+            <Button
+              key={index}
+              value={answer}
+              onClick={() => onButtonClick(answer)}
+              isSelected={selectedAnswer === answer}
+              color={selectedAnswer === answer ? darkPink : lightPink}
+            />
+          ))}
+        </div>
+    </div>
   );
 }
 
-function Button({ value, onClick, isSelected }) {
+function Button({ value, onClick, isSelected, color }) {
   return (
-    <button className={`button ${isSelected ? 'selected' : ''}`} onClick={onClick}>
+    <button className={`button ${isSelected ? 'selected' : ''} border-2 p-6 rounded-md`} onClick={onClick} style={{backgroundColor: color}}>
       {value}
     </button>
   );
@@ -161,7 +117,7 @@ function Button({ value, onClick, isSelected }) {
 
 export default function Home() {
   return (
-    <div>
+    <div className="flex items-center justify-center h-screen">
       <Quiz />
     </div>
   );

@@ -3,25 +3,15 @@
 @tailwind utilities;
 
 body {
-  margin: 10px;
+  background-color: #F9476C;
+  padding-top: 20%; /* take this out later when there's a title bar */
 }
 
-.question {
-  font-size: 18px;
-  margin-left: 5px;
+
+.quiz {
+  background-color: #FF8195;
 }
 
 .button {
-  background: #b3b3b3;
-  border: 1px solid #191414;
-  font-size: 16px;
-  line-height: 34px;
-  height: 34px;
-  text-align: center;
-  width: 150px;
-  margin: 1px;
-}
-
-.selected {
-  background: #535353;
+  background-color: #FAF2E8;
 }
