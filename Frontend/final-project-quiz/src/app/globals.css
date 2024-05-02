@@ -6,13 +6,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #F9476C;
-  padding: 10% 0 10% 0;
+  background-color: #f43f5e;
+  padding: 2.5% 0 1.5% 0;
 }
 
 
 .quiz {
-  background-color: #FF8195;
+  background-color: #fb7185;
 }
 
 .title {
