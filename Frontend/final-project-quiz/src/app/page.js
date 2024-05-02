@@ -70,7 +70,12 @@ function Quiz() {
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
 
   useEffect(() => {
-    setShuffledQuestions(shuffle([...questions]));
+    const shuffled = shuffle([...questions]);
+    const updatedQuestions = shuffled.map((question) => ({
+      ...question,
+      possibleAnswers: shuffle([...question.possibleAnswers])
+    }));
+    setShuffledQuestions(updatedQuestions);
   }, []);
 
   function handleAnswerSelected(questionId, selectedAnswer) {
