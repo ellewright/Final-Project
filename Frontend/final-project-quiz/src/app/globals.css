@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #F9476C;
-  padding-top: 20%; /* take this out later when there's a title bar */
+  padding: 10% 0 10% 0;
 }
 
 
@@ -12,6 +15,6 @@ body {
   background-color: #FF8195;
 }
 
-.button {
-  background-color: #FAF2E8;
+.title {
+  font-size: 5em;
 }
