@@ -20,7 +20,6 @@ function shuffle(array) {
 
 function Quiz() {
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  // const [showResults, setShowResults] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
   const router = useRouter();
 
@@ -51,8 +50,6 @@ function Quiz() {
         }
       });
       score = correctAnswersCount;
-      // setShowResults(true);
-      // alert(`You got ${correctAnswersCount} correct answers out of ${questions.length}.`);
       router.push("/results");
     } else {
       alert("Please answer all questions before submitting.");
