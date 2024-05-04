@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import questions from "./questions";
@@ -51,6 +50,7 @@ function Quiz() {
           correctAnswersCount++;
         }
       });
+      score = correctAnswersCount;
       // setShowResults(true);
       // alert(`You got ${correctAnswersCount} correct answers out of ${questions.length}.`);
       router.push("/results");
@@ -120,3 +120,5 @@ export default function Home() {
     </div>
   );
 }
+
+export let score;
