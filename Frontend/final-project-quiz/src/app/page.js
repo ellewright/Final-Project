@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import questions from "./questions";
 
@@ -19,8 +21,9 @@ function shuffle(array) {
 
 function Quiz() {
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [showResults, setShowResults] = useState(false);
+  // const [showResults, setShowResults] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const shuffled = shuffle([...questions]);
@@ -48,9 +51,9 @@ function Quiz() {
           correctAnswersCount++;
         }
       });
-      // Show results
-      setShowResults(true);
-      alert(`You got ${correctAnswersCount} correct answers out of ${questions.length}.`);
+      // setShowResults(true);
+      // alert(`You got ${correctAnswersCount} correct answers out of ${questions.length}.`);
+      router.push("/results");
     } else {
       alert("Please answer all questions before submitting.");
     }
@@ -72,11 +75,6 @@ function Quiz() {
           Submit
         </button>
       </div>
-      {showResults && (
-        <div>
-          {/* Display results here*/}
-        </div>
-      )}
     </div>
   );
 }
